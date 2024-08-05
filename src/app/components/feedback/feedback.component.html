@@ -1,0 +1,98 @@
+<div class="container mt-4">
+  <h1 class="text-center">User Feedback Form</h1>
+  <form
+    [formGroup]="feedbackForm"
+    (ngSubmit)="feedbackForm.status !== 'INVALID' && submitFeedback()"
+  >
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input
+        type="text"
+        class="form-control"
+        id="username"
+        placeholder="Username"
+        formControlName="username"
+        [ngClass]="{
+          error: getControl('username')?.errors && getControl('username')?.touched
+        }"
+      />
+      <div
+        *ngIf="getControl('username')?.errors && getControl('username')?.touched"
+      >
+        <small
+          class="text-danger"
+          *ngIf="getControl('username')?.errors?.['required']"
+        >
+          Username is required</small
+        >
+        <small
+          class="text-danger"
+          *ngIf="getControl('username')?.errors?.['minlength']"
+        >
+          Username must be at least 3 characters long</small
+        >
+      </div>
+
+      <label for="phone" class="form-label">Phone Number</label>
+      <input
+        type="tel"
+        class="form-control"
+        id="phone"
+        placeholder="Phone Number"
+        formControlName="phone"
+        [ngClass]="{
+          error: getControl('phone')?.errors && getControl('phone')?.touched
+        }"
+      />
+      <div *ngIf="getControl('phone')?.errors && getControl('phone')?.touched">
+        <small
+          class="text-danger"
+          *ngIf="getControl('phone')?.errors?.['required']"
+        >
+          Phone number is required</small
+        >
+        <small
+          class="text-danger"
+          *ngIf="getControl('phone')?.errors?.['pattern']"
+        >
+          Please enter a valid phone number (e.g., 1234567890).</small
+        >
+      </div>
+
+      <label for="feedback" class="form-label">Feedback</label>
+      <textarea
+        class="form-control"
+        id="feedback"
+        placeholder="Your feedback"
+        formControlName="feedback"
+        [ngClass]="{
+          error: getControl('feedback')?.errors && getControl('feedback')?.touched
+        }"
+      ></textarea>
+      <div
+        *ngIf="getControl('feedback')?.errors && getControl('feedback')?.touched"
+      >
+        <small
+          class="text-danger"
+          *ngIf="getControl('feedback')?.errors?.['required']"
+        >
+          Feedback is required</small
+        >
+        <small
+          class="text-danger"
+          *ngIf="getControl('feedback')?.errors?.['minlength']"
+        >
+          Feedback must be at least 10 characters long</small
+        >
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <input
+        type="submit"
+        class="btn btn-success active"
+        [disabled]="feedbackForm.status === 'INVALID'"
+      />
+    </div>
+  </form>
+</div>

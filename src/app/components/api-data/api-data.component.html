@@ -1,0 +1,13 @@
+<h1 class="title">API Data</h1>
+<div *ngIf="data">
+  <div class="card-container">
+    <div class="card" *ngFor="let item of data">
+      <h2>{{ item.title }}</h2>
+      <img [src]="item.image" alt="{{ item.title }}" class="product-image">
+      <p><strong>Category:</strong> {{ item.category }}</p>
+      <p><strong>Price:</strong> ${{ item.price }}</p>
+      <p><strong>Rating:</strong> {{ item.rating.rate }} ({{ item.rating.count }} reviews)</p>
+    </div>
+  </div>
+</div>
+<button class="btn_fetch" (click)="fetchData()">Fetch Data</button>
